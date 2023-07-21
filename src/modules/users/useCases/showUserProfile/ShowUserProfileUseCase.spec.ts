@@ -1,6 +1,6 @@
-import { InMemoryUsersRepository } from "@modules/users/repositories/in-memory/InMemoryUsersRepository";
 import { AppError } from "@shared/errors/AppError";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
+import { InMemoryUsersRepository } from "@modules/users/repositories/in-memory/InMemoryUsersRepository";
 import { ShowUserProfileUseCase } from "./ShowUserProfileUseCase";
 
 let usersRepositoryInMemory: InMemoryUsersRepository;
