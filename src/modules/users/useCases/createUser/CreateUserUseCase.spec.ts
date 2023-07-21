@@ -1,5 +1,3 @@
-import { hash } from "bcryptjs";
-
 import { CreateUserUseCase } from "./CreateUserUseCase";
 import { InMemoryUsersRepository } from "@modules/users/repositories/in-memory/InMemoryUsersRepository";
 import { AppError } from "@shared/errors/AppError";
@@ -17,7 +15,7 @@ describe("Create User use case tests", () => {
     const user = await createUserUseCase.execute({
       email: "dev@test.com",
       name: "Dev Test",
-      password: await hash("123456", 8),
+      password: "123456",
     });
 
     expect(user).toHaveProperty("id");
@@ -28,13 +26,13 @@ describe("Create User use case tests", () => {
       await createUserUseCase.execute({
         email: "dev@test.com",
         name: "Dev Test",
-        password: await hash("123456", 8),
+        password: "123456",
       });
 
       await createUserUseCase.execute({
         email: "dev@test.com",
         name: "Dev Test 2",
-        password: await hash("123456", 8),
+        password: "123456",
       });
     }).rejects.toBeInstanceOf(AppError);
   });
