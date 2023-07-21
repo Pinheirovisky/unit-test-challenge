@@ -5,6 +5,7 @@
       "@config/*": ["config/*"],
       "@database/*": ["database/*"],
       "@modules/*": ["modules/*"],
+      "@root/*": ["./*"],
       "@routes/*": ["routes/*"],
       "@shared/*": ["shared/*"]
     },

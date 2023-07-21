@@ -11,7 +11,7 @@ describe("Create User use case tests", () => {
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
-  it("should create an user", async () => {
+  it("should be able to create an user", async () => {
     const user = await createUserUseCase.execute({
       email: "dev@test.com",
       name: "Dev Test",
@@ -21,7 +21,7 @@ describe("Create User use case tests", () => {
     expect(user).toHaveProperty("id");
   });
 
-  it("should nout create an user with the email already exists", async () => {
+  it("should not create an user with the email already exists", async () => {
     expect(async () => {
       await createUserUseCase.execute({
         email: "dev@test.com",
