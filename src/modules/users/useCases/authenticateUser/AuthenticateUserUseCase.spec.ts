@@ -40,7 +40,7 @@ describe("Authenticate User use case tests", () => {
     }).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should not auth user if password is wrong", async () => {
+  it("should be able to auth user", async () => {
     const user = {
       email: "dev@test.com",
       name: "Dev Test",
