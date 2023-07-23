@@ -5,7 +5,7 @@ import { app } from "@root/app";
 import createConnection from "@database/index";
 
 let connection: Connection;
-describe("Show User Profile Controller tests", () => {
+describe("Get Balance Controller tests", () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.runMigrations();
@@ -16,7 +16,15 @@ describe("Show User Profile Controller tests", () => {
     await connection.close();
   });
 
-  it("should shows the user profile", async () => {
+  it("should not get balance without token", async () => {
+    const response = await request(app)
+      .get("/api/v1/statements/balance")
+      .send();
+
+    expect(response.status).toBe(401);
+  });
+
+  it("should be able to get balance", async () => {
     await request(app).post("/api/v1/users").send({
       email: "dev@test.com",
       name: "Dev Test",
@@ -31,19 +39,14 @@ describe("Show User Profile Controller tests", () => {
     });
 
     const response = await request(app)
-      .get("/api/v1/profile")
+      .get("/api/v1/statements/balance")
       .send()
       .set({
         Authorization: `Bearer ${token}`,
       });
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty("id");
-  });
-
-  it("should not show a profile without token", async () => {
-    const response = await request(app).get("/api/v1/profile").send();
-
-    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("balance");
+    expect(response.body).toHaveProperty("statement");
   });
 });

@@ -26,7 +26,7 @@ describe("Get Balance use case tests", () => {
     }).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should gets balance", async () => {
+  it("should get balance", async () => {
     const user = {
       email: "dev@test.com",
       name: "Dev Test",
